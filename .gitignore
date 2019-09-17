@@ -40,6 +40,13 @@ build/Release
 
 .idea/workspace.xml
 
-sample-videos/
 lab-5/lambda/**/*.json
 !lab-5/lambda/**/package.json
+
+
+# Config Files
+config.js
+
+# Video Samples
+video-samples/
+sample-videos/

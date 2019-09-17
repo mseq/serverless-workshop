@@ -62,14 +62,10 @@ var videoController = {
     connectToFirebase: function () {
         var that = this;
 
-        /* 
-        *
-        *       PASTE CONFIG HERE 
-        *
-        */
-
-
-        firebase.initializeApp(config);
+        // Config from Firebase
+        var firebaseConfig = that.data.config.firebaseConfig;
+        
+        firebase.initializeApp(firebaseConfig);
 
         var firebaseRef = firebase.database().ref();
 

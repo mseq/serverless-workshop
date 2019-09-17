@@ -57,7 +57,7 @@ var uploadController = {
         }).done(function (response) {
             that.uiElements.uploadButtonContainer.show();
             that.uiElements.uploadProgressBar.hide();
-            alert('Uploaded Finished');
+            //alert('Uploaded Finished');
         }).fail(function (response) {
             that.uiElements.uploadButtonContainer.show();
             that.uiElements.uploadProgressBar.hide();

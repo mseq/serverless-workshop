@@ -21,16 +21,16 @@ firebase.initializeApp({
     databaseURL: process.env.DATABASE_URL
 });
 
-const generateTranscoderParams = (sourceKey, outputKey, transcoderPipelineID) => {
+const generateTranscoderParams = (sourceKey, uniqueVideoKey, videoName, transcoderPipelineID) => {
     const params = {
         PipelineId: transcoderPipelineID,
-        OutputKeyPrefix: outputKey + '/',
+        OutputKeyPrefix: uniqueVideoKey + '/',
         Input: {
             Key: sourceKey
         },
         Outputs: [
             {
-                Key: outputKey + '-web-480p' + '.mp4',
+                Key: videoName + '-web-480p' + '.mp4',
                 PresetId: '1351620000001-000020' //480p 16:9 format
             }
         ]
@@ -65,12 +65,16 @@ const handler = (event, context, callback) => {
 
     //remove the extension
     const outputKey = sourceKey.split('.')[0];
-    console.log("Output key:", sourceKey);
+    console.log("Output key:", outputKey);
 
     // get the unique video key (the folder name)
     const uniqueVideoKey = outputKey.split('/')[0];
+    console.log("Unique Video Key:", uniqueVideoKey);
 
-    const params = generateTranscoderParams(sourceKey, outputKey, pipelineID);
+    const videoName = outputKey.split('/')[1];
+    console.log("Video Name:", videoName);
+
+    const params = generateTranscoderParams(sourceKey, uniqueVideoKey, videoName, pipelineID);
 
     return elasticTranscoder.createJob(params)
         .promise()
